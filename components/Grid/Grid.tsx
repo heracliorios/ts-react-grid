@@ -18,7 +18,6 @@ const Grid = () => {
 
   const onSizeChange = (size) => {
     setSize(size);
-
     setMatrix(generateConfigurationForMatrix(size));
   };
 
@@ -28,9 +27,13 @@ const Grid = () => {
     );
   };
 
-  const { rows = [], matches = { columns: [], rows: [], diagonals: [] } } =
-    matrix;
+  const {
+    data,
+    rows = [],
+    matches = { columns: [], rows: [], diagonals: [] },
+  } = matrix;
 
+  // console.log('data', data);
   console.log('matches', matches);
 
   return (

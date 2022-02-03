@@ -1,27 +1,41 @@
 class Match {
   matches = {};
   temp = {};
+  canMatch = {};
 
   scaffold = (configuration, key, current, previous, size) => {
     if (size > 0) {
-      if (!(key in this.temp)) {
-        this.temp[key] = [configuration];
+      if (previous === undefined || !(key in this.temp)) {
+        this.temp[key] = [
+          {
+            ...configuration,
+          },
+        ];
+        this.canMatch[key] = true;
       } else {
-        if (previous === current) {
-          this.temp[key].push(configuration);
-        }
+        if (this.canMatch[key] && current === previous) {
+          this.temp[key].push({
+            ...configuration,
+          });
+          this.canMatch[key] = true;
+        } else this.canMatch[key] = false;
       }
     }
   };
 
-  match = (key, size) => {
-    if (size > 1)
-      if (this.temp[key].length === size)
-        this.matches[key] = [...this.temp[key]];
+  getMatches = () => {
+    const result = {};
+
+    for (const key in this.temp) {
+      if (this.canMatch[key]) result[key] = [...this.temp[key]];
+    }
+
+    return result;
   };
 
   flush = () => {
     this.temp = {};
+    this.canMatch = {};
   };
 }
 

@@ -27,7 +27,7 @@ const Data: React.FC<DataProps, DataState> = ({
     updateMatrix({
       column,
       row,
-      value,
+      value: value > 0 ? 0 : 1,
     });
   };
 

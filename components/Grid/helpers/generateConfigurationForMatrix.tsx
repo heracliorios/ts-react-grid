@@ -18,19 +18,11 @@ const generateConfiguration = (size = 0) => {
 
   const max = size * size;
 
+  matching.rows.flush();
+  matching.columns.flush();
+
   for (let index = 0; index < max; index++) {
     const value = generateRandomValue();
-
-    const values = {
-      row: {
-        previous: index > 0 ? data[index - 1].value : null,
-        current: value,
-      },
-      column: {
-        previous: data[index - size] && data[index - size].value,
-        current: value,
-      },
-    };
 
     const configuration = {
       column: counter.column,
@@ -43,8 +35,8 @@ const generateConfiguration = (size = 0) => {
     matching.rows.scaffold(
       configuration,
       configuration.row,
-      values.row.previous,
-      values.row.current,
+      configuration.value,
+      data[index - 1] && data[index - 1].value,
       size
     );
 
@@ -52,26 +44,20 @@ const generateConfiguration = (size = 0) => {
     matching.columns.scaffold(
       configuration,
       configuration.column,
-      values.column.previous,
-      values.column.current,
+      configuration.value,
+      data[index - size] && data[index - size].value,
       size
     );
 
     // NOTE: SCAFFOLD DIAGONALS
     // TODO: COMPLETE
-    matching.diagonals.scaffold();
+    // matching.diagonals.scaffold();
 
     // NOTE: PUSH NEW CONFIGURED POINTS
     temp.row.push(configuration);
     data.push(configuration);
 
-    // NOTE: PUSH COLUMN MATCHES, DONE PER LOOP.
-    if (size > 1) matching.columns.match(configuration.column, size);
-
     if ((index + 1) % size === 0) {
-      // NOTE: PUSH ROW MATCHES, DONE PER ROW SIZE INCREASE.
-      if (size > 1) matching.rows.match(configuration.row, size);
-
       rows.push(temp.row);
       temp.row = [];
 
@@ -83,7 +69,7 @@ const generateConfiguration = (size = 0) => {
   return {
     data,
     rows,
-    matches: matching.getMatches(),
+    matches: matching.getMatches(size),
   };
 };
 
