@@ -1,7 +1,9 @@
 import Match from './match';
+import Diagonals from './diagonals';
 
 const rows = new Match();
 const columns = new Match();
+const diagonals = new Diagonals();
 
 const getMatches = () => {
   return {
@@ -13,5 +15,6 @@ const getMatches = () => {
 export default {
   rows,
   columns,
+  diagonals,
   getMatches,
 };
