@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import { generateRandomValue } from './helpers';
+
 import Matrix from './Matrix';
 import Select from './Select';
 import Count from './Count';
@@ -9,7 +11,10 @@ import {
   updateConfigurationForMatrix,
 } from './helpers';
 
-const defaultSize = 1;
+const defaultSize = generateRandomValue({
+  max: 6,
+  min: 2,
+});
 const defaultConfigurationForMatrix =
   generateConfigurationForMatrix(defaultSize);
 
@@ -32,8 +37,10 @@ const Grid = () => {
     );
   };
 
-  const { rows = [], matches = { columns: [], rows: [], diagonals: [] } } =
+  const { rows = [], matches = { columns: {}, rows: {}, diagonals: {} } } =
     matrix;
+
+  console.log(matches.diagonals);
 
   return (
     <div className="grid">

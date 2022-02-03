@@ -23,7 +23,10 @@ const generateConfiguration = (size = 0) => {
   matching.diagonals.flush();
 
   for (let index = 0; index < max; index++) {
-    const value = generateRandomValue();
+    const value = generateRandomValue({
+      max: 1,
+      min: 0,
+    });
 
     const configuration = {
       id: index,
