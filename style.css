@@ -89,6 +89,6 @@
 
 .grid .matrix .row .data:hover {
   cursor: pointer;
-  color: rgb(255, 0, 34);
+  color: blue !important;
   opacity: 0.75;
 }
