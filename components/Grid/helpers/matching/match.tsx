@@ -17,24 +17,27 @@ class Match {
           this.temp[key].push({
             ...configuration,
           });
-          this.canMatch[key] = true;
         } else this.canMatch[key] = false;
       }
     }
   };
 
-  getMatches = () => {
-    const result = {};
-
-    for (const key in this.temp) {
-      if (this.canMatch[key]) result[key] = [...this.temp[key]];
+  lock = (key, size) => {
+    if (this.canMatch[key] && this.temp[key].length === size) {
+      this.matches = {
+        ...this.matches,
+        [key]: [...this.temp[key]],
+      };
     }
-
-    return result;
   };
+
+  getMatches = () => ({
+    ...this.matches,
+  });
 
   flush = () => {
     this.temp = {};
+    this.matches = {};
     this.canMatch = {};
   };
 }

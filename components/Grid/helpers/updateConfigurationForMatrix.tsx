@@ -44,7 +44,13 @@ const updateConfigurationForMatrix = (
 
       temp.row.push(update);
 
+      // NOTE: PUSH COLUMN MATCHES, DONE PER LOOP.
+      matching.columns.lock(update.column, size);
+
       if ((index + 1) % size === 0) {
+        // NOTE: PUSH ROW MATCHES, DONE PER ROW SIZE INCREASE.
+        matching.rows.lock(update.row, size);
+
         rows.push(temp.row);
         temp.row = [];
       }

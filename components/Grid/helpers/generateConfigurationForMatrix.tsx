@@ -57,7 +57,13 @@ const generateConfiguration = (size = 0) => {
     temp.row.push(configuration);
     data.push(configuration);
 
+    // NOTE: PUSH COLUMN MATCHES, DONE PER LOOP.
+    matching.columns.lock(configuration.column, size);
+
     if ((index + 1) % size === 0) {
+      // NOTE: PUSH ROW MATCHES, DONE PER ROW SIZE INCREASE.
+      matching.rows.lock(configuration.row, size);
+
       rows.push(temp.row);
       temp.row = [];
 
