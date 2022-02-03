@@ -12,9 +12,12 @@ import {
 } from './helpers';
 
 const defaultSize = generateRandomValue({
-  max: 6,
-  min: 2,
+  max: 3,
+  min: 3,
+  // max: 6,
+  // min: 2,
 });
+
 const defaultConfigurationForMatrix =
   generateConfigurationForMatrix(defaultSize);
 

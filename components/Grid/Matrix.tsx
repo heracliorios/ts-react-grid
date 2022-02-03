@@ -25,6 +25,7 @@ const Matrix: React.FC<MatrixProps, MatrixState> = ({
               }
               row={row}
               column={column}
+              diagonal={diagonal}
               updateMatrix={updateMatrix}
               id={id}
             />
