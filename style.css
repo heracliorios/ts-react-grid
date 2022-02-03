@@ -39,6 +39,10 @@
   align-items: center;
 }
 
+.grid .count {
+  padding: 8px 0px;
+}
+
 .grid .matrix .row {
   display: flex;
 }

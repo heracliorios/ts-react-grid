@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { calculateMatches } from './helpers';
+import { gridCount } from './helpers';
 
 const Count = ({ matches = { columns: [], rows: [], diagonals: [] } }) => {
-  const count = calculateMatches(matches);
+  const count = gridCount(matches);
 
-  return <div className="count">{count}</div>;
+  return <div className="count">Grid Count: {count}</div>;
 };
 
 export default Count;

@@ -40,8 +40,8 @@ const Grid = () => {
   return (
     <div className="grid">
       <Select onSizeChange={onSizeChange} defaultSize={defaultSize} />
-      <Matrix rows={rows} matches={matches} updateMatrix={updateMatrix} />
       <Count matches={matches} />
+      <Matrix rows={rows} matches={matches} updateMatrix={updateMatrix} />
     </div>
   );
 };

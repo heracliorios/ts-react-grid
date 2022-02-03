@@ -1,6 +1,4 @@
-const calculateMatches = (
-  matches = { columns: [], rows: [], diagonals: [] }
-) => {
+const gridCount = (matches = { columns: [], rows: [], diagonals: [] }) => {
   const { columns = [], rows = [], diagonals = [] } = matches;
 
   return (
@@ -10,4 +8,4 @@ const calculateMatches = (
   );
 };
 
-export default calculateMatches;
+export default gridCount;
