@@ -21,9 +21,13 @@ const Grid = () => {
     setMatrix(generateConfigurationForMatrix(size));
   };
 
-  const updateMatrix = ({ row, column, value }) => {
+  const updateMatrix = ({ id, row, column, value }) => {
     setMatrix((previousMatrix) =>
-      updateConfigurationForMatrix({ row, column, value }, previousMatrix, size)
+      updateConfigurationForMatrix(
+        { id, row, column, value },
+        previousMatrix,
+        size
+      )
     );
   };
 

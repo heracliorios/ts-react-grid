@@ -10,6 +10,7 @@ const Data: React.FC<DataProps, DataState> = ({
   isInMatchingDiagonal,
   row,
   column,
+  id,
   updateMatrix = () => {},
 }) => {
   const classes = [];
@@ -25,6 +26,7 @@ const Data: React.FC<DataProps, DataState> = ({
 
   const onClick = () => {
     updateMatrix({
+      id,
       column,
       row,
       value: value > 0 ? 0 : 1,

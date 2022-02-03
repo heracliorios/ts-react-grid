@@ -25,6 +25,7 @@ const generateConfiguration = (size = 0) => {
     const value = generateRandomValue();
 
     const configuration = {
+      id: index,
       column: counter.column,
       row: counter.row,
       // diagonal: index - counter.row * (size + 1),

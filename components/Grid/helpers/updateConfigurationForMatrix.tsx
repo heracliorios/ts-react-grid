@@ -1,7 +1,7 @@
 import matching from './matching';
 
 const updateConfigurationForMatrix = (
-  { row, column, value },
+  { id, row, column, value },
   matrix = { data: [] },
   size
 ) => {
@@ -19,6 +19,8 @@ const updateConfigurationForMatrix = (
       const update = {
         ...configuration,
       };
+
+      // const previous = index === id ? 
 
       if (configuration.row === row && configuration.column === column) {
         update.value = value;
