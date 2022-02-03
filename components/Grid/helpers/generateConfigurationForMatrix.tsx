@@ -1,5 +1,4 @@
 import generateRandomValue from './generateRandomValue';
-
 import matching from './matching';
 
 const generateConfiguration = (size = 0) => {
@@ -28,7 +27,7 @@ const generateConfiguration = (size = 0) => {
         current: value,
       },
       column: {
-        previous: counter.row > 0 ? data[index - size].value : null,
+        previous: data[index - size] && data[index - size].value,
         current: value,
       },
     };
