@@ -20,6 +20,7 @@ const generateConfiguration = (size = 0) => {
 
   matching.rows.flush();
   matching.columns.flush();
+  matching.diagonals.flush();
 
   for (let index = 0; index < max; index++) {
     const value = generateRandomValue();
@@ -28,7 +29,7 @@ const generateConfiguration = (size = 0) => {
       id: index,
       column: counter.column,
       row: counter.row,
-      // diagonal: index - counter.row * (size + 1),
+      diagonal: index - counter.row * (size + 1),
       value,
     };
 
@@ -51,8 +52,15 @@ const generateConfiguration = (size = 0) => {
     );
 
     // NOTE: SCAFFOLD DIAGONALS
-    // TODO: COMPLETE
-    // matching.diagonals.scaffold();
+    matching.diagonals.scaffold(
+      size,
+      configuration,
+      configuration.id,
+      counter.column,
+      counter.row,
+      configuration.diagonal,
+      data
+    );
 
     // NOTE: PUSH NEW CONFIGURED POINTS
     temp.row.push(configuration);

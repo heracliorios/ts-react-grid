@@ -35,8 +35,6 @@ const Grid = () => {
   const { rows = [], matches = { columns: [], rows: [], diagonals: [] } } =
     matrix;
 
-  console.log('matches', matches);
-
   return (
     <div className="grid">
       <Select onSizeChange={onSizeChange} defaultSize={defaultSize} />

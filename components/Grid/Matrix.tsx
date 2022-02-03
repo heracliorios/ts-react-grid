@@ -7,7 +7,7 @@ interface MatrixState {}
 
 const Matrix: React.FC<MatrixProps, MatrixState> = ({
   rows = [],
-  matches = { columns: [], rows: [], diagonals: [] },
+  matches = { columns: {}, rows: {}, diagonals: {} },
   updateMatrix = () => {},
 }) => {
   return (
@@ -18,9 +18,11 @@ const Matrix: React.FC<MatrixProps, MatrixState> = ({
             <Data
               key={`grid-row-${row}-column-${column}`}
               value={value}
-              isInMatchingColumn={column in matches.columns}
-              isInMatchingRow={row in matches.rows}
-              // isInMatchingDiagonal={diagonal in matches.diagonals}
+              isInMatchingColumn={matches.columns && column in matches.columns}
+              isInMatchingRow={matches.rows && row in matches.rows}
+              isInMatchingDiagonal={
+                matches.diagonals && diagonal in matches.diagonals
+              }
               row={row}
               column={column}
               updateMatrix={updateMatrix}

@@ -1,5 +1,5 @@
-const gridCount = (matches = { columns: [], rows: [], diagonals: [] }) => {
-  const { columns = [], rows = [], diagonals = [] } = matches;
+const gridCount = (matches = { columns: {}, rows: {}, diagonals: {} }) => {
+  const { columns = {}, rows = {}, diagonals = {} } = matches;
 
   return (
     Object.keys(columns).length +

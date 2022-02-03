@@ -8,6 +8,7 @@ const diagonals = new Diagonals();
 const refresh = (data = [], size = 0) => {
   rows.flush();
   columns.flush();
+  diagonals.flush();
 
   for (let index = 0; index < data.length; index++) {
     const configuration = data[index];
@@ -30,6 +31,17 @@ const refresh = (data = [], size = 0) => {
       size
     );
 
+    // NOTE: SCAFFOLD DIAGONALS
+    diagonals.scaffold(
+      size,
+      configuration,
+      configuration.id,
+      configuration.column,
+      configuration.row,
+      configuration.diagonal,
+      data
+    );
+
     // NOTE: PUSH COLUMN MATCHES, DONE PER LOOP.
     columns.lock(configuration.column, size);
 
@@ -44,12 +56,14 @@ const getMatches = (size) => {
   const matches = {
     rows: {},
     columns: {},
+    diagonals: {},
   };
 
   if (size <= 1) return matches;
 
   matches.rows = rows.getMatches();
   matches.columns = columns.getMatches();
+  matches.diagonals = diagonals.getMatches();
 
   return matches;
 };

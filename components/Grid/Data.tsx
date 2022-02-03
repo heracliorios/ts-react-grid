@@ -13,6 +13,14 @@ const Data: React.FC<DataProps, DataState> = ({
   id,
   updateMatrix = () => {},
 }) => {
+  const onClick = () =>
+    updateMatrix({
+      id,
+      column,
+      row,
+      value: value > 0 ? 0 : 1,
+    });
+
   const classes = [];
 
   classes.push('data');
@@ -23,15 +31,6 @@ const Data: React.FC<DataProps, DataState> = ({
   if (isInMatchingDiagonal) classes.push('is-in-matching-diagonal');
 
   const className = classes.join(' ');
-
-  const onClick = () => {
-    updateMatrix({
-      id,
-      column,
-      row,
-      value: value > 0 ? 0 : 1,
-    });
-  };
 
   return (
     <div className={className} onClick={onClick}>
