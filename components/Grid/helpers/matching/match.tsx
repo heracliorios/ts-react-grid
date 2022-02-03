@@ -15,7 +15,13 @@ class Match {
   };
 
   match = (key, size) => {
-    if (this.temp[key].length === size) this.matches[key] = [...this.temp[key]];
+    if (size > 1)
+      if (this.temp[key].length === size)
+        this.matches[key] = [...this.temp[key]];
+  };
+
+  flush = () => {
+    this.temp = {};
   };
 }
 

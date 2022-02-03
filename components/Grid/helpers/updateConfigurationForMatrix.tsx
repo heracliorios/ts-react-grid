@@ -11,6 +11,9 @@ const updateConfigurationForMatrix = (
     row: [],
   };
 
+  matching.rows.flush();
+  matching.columns.flush();
+
   const data = matrix.data.map(
     (configuration = { row: [], column: [] }, index) => {
       const update = {
@@ -37,8 +40,8 @@ const updateConfigurationForMatrix = (
       matching.rows.scaffold(
         update,
         update.row,
-        values.row.previous,
         values.row.current,
+        values.row.previous,
         size
       );
 
@@ -46,19 +49,19 @@ const updateConfigurationForMatrix = (
       matching.columns.scaffold(
         update,
         update.column,
-        values.column.previous,
         values.column.current,
+        values.column.previous,
         size
       );
 
       temp.row.push(update);
 
       // NOTE: PUSH COLUMN MATCHES, DONE PER LOOP.
-      if (size > 1) matching.columns.match(update.column, size);
+      matching.columns.match(update.column, size);
 
       if ((index + 1) % size === 0) {
         // NOTE: PUSH ROW MATCHES, DONE PER ROW SIZE INCREASE.
-        if (size > 1) matching.rows.match(update.row, size);
+        matching.rows.match(update.row, size);
 
         rows.push(temp.row);
         temp.row = [];
