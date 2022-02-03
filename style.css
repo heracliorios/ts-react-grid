@@ -1,0 +1,94 @@
+.no-select {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+.grid > .select.container {
+  display: flex;
+}
+
+.grid > .select.container > * {
+  padding: 8px;
+}
+
+.grid > .select.container > *:first-child {
+  padding-left: 0px;
+}
+
+.grid > .select.container > *:last-child {
+  padding-right: 0px;
+}
+
+.grid > .select.container > .button {
+  color: blue;
+}
+
+.grid > .select.container > .button:hover {
+  color: red;
+  cursor: pointer;
+}
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.grid .matrix .row {
+  display: flex;
+}
+
+.grid .matrix .row .data {
+  display: flex;
+  padding: 4px 8px;
+  opacity: 0.3;
+}
+
+.grid .matrix .row .data.is-in-matching-row {
+  color: rgb(0, 156, 60);
+  opacity: 1;
+}
+
+.grid .matrix .row .data.is-in-matching-column {
+  color: red;
+  opacity: 1;
+}
+
+.grid .matrix .row .data.is-in-matching-diagonal {
+  color: rgb(0, 153, 255);
+  opacity: 1;
+}
+
+.grid .matrix .row .data.is-in-matching-row.is-in-matching-column {
+  opacity: 0.75;
+  color: #b6aa01;
+}
+
+.grid .matrix .row .data.is-in-matching-row.is-in-matching-diagonal {
+  opacity: 0.75;
+  color: rgb(0, 30, 128);
+}
+
+.grid .matrix .row .data.is-in-matching-column.is-in-matching-diagonal {
+  opacity: 0.75;
+  color: rgb(128, 0, 43);
+}
+
+.grid
+  .matrix
+  .row
+  .data.is-in-matching-row.is-in-matching-column.is-in-matching-diagonal {
+  opacity: 0.25;
+  color: #668b00;
+}
+
+.grid .matrix .row .data:hover {
+  cursor: pointer;
+  color: rgb(255, 0, 34);
+  opacity: 0.75;
+}
