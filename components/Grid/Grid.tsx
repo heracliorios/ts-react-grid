@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import Matrix from './Matrix';
 import Select from './Select';
+import Count from './Count';
 
 import {
   generateConfigurationForMatrix,
@@ -31,19 +32,16 @@ const Grid = () => {
     );
   };
 
-  const {
-    data,
-    rows = [],
-    matches = { columns: [], rows: [], diagonals: [] },
-  } = matrix;
+  const { rows = [], matches = { columns: [], rows: [], diagonals: [] } } =
+    matrix;
 
-  // console.log('data', data);
   console.log('matches', matches);
 
   return (
     <div className="grid">
       <Select onSizeChange={onSizeChange} defaultSize={defaultSize} />
       <Matrix rows={rows} matches={matches} updateMatrix={updateMatrix} />
+      <Count matches={matches} />
     </div>
   );
 };
