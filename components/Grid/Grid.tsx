@@ -14,8 +14,6 @@ import {
 const defaultSize = generateRandomValue({
   max: 3,
   min: 3,
-  // max: 6,
-  // min: 2,
 });
 
 const defaultConfigurationForMatrix =
@@ -42,8 +40,6 @@ const Grid = () => {
 
   const { rows = [], matches = { columns: {}, rows: {}, diagonals: {} } } =
     matrix;
-
-  console.log(matches.diagonals);
 
   return (
     <div className="grid">

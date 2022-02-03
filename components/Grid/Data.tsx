@@ -14,20 +14,14 @@ const Data: React.FC<DataProps, DataState> = ({
   id,
   updateMatrix = () => {},
 }) => {
-  const onClick = () => {
-    const data = {
+  const onClick = () =>
+    updateMatrix({
       id,
       column,
       row,
       diagonal,
       value: value > 0 ? 0 : 1,
-    };
-
-    // TODO: UNCOMMENT FOR INTERACTIVITY
-    // updateMatrix(data);
-
-    console.log(data);
-  };
+    });
 
   const classes = [];
 
