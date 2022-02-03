@@ -2,68 +2,53 @@ import matching from './matching';
 
 const updateConfigurationForMatrix = (
   { id, row, column, value },
-  matrix = { data: [] },
+  matrix = { data: [], rows: [] },
   size
 ) => {
-  const rows = [];
+  // NOTE: UPDATE DATA ACCORDINGLY
+  let data = [...matrix.data];
+  data[id].value = value;
 
-  const temp = {
-    row: [],
-  };
-
+  // NOTE: REFRESH MATCHINGS ACCORDINGLY
   matching.rows.flush();
   matching.columns.flush();
+  data = data.map((configuration = { row: [], column: [] }, index) => {
+    // NOTE: SCAFFOLD MATCHING ROWS
+    matching.rows.scaffold(
+      configuration,
+      configuration.row,
+      configuration.value,
+      matrix.data[index - 1] && matrix.data[index - 1].value,
+      size
+    );
 
-  const data = matrix.data.map(
-    (configuration = { row: [], column: [] }, index) => {
-      const update = {
-        ...configuration,
-      };
+    // NOTE: SCAFFOLD COLUMNS
+    matching.columns.scaffold(
+      configuration,
+      configuration.column,
+      configuration.value,
+      matrix.data[index - size] && matrix.data[index - size].value,
+      size
+    );
 
-      // const previous = index === id ? 
+    // NOTE: PUSH COLUMN MATCHES, DONE PER LOOP.
+    matching.columns.lock(configuration.column, size);
 
-      if (configuration.row === row && configuration.column === column) {
-        update.value = value;
-      }
-
-      // NOTE: SCAFFOLD MATCHING ROWS
-      matching.rows.scaffold(
-        update,
-        update.row,
-        update.value,
-        matrix.data[index - 1] && matrix.data[index - 1].value,
-        size
-      );
-
-      // NOTE: SCAFFOLD COLUMNS
-      matching.columns.scaffold(
-        update,
-        update.column,
-        update.value,
-        matrix.data[index - size] && matrix.data[index - size].value,
-        size
-      );
-
-      temp.row.push(update);
-
-      // NOTE: PUSH COLUMN MATCHES, DONE PER LOOP.
-      matching.columns.lock(update.column, size);
-
-      if ((index + 1) % size === 0) {
-        // NOTE: PUSH ROW MATCHES, DONE PER ROW SIZE INCREASE.
-        matching.rows.lock(update.row, size);
-
-        rows.push(temp.row);
-        temp.row = [];
-      }
-
-      return update;
+    if ((index + 1) % size === 0) {
+      // NOTE: PUSH ROW MATCHES, DONE PER ROW SIZE INCREASE.
+      matching.rows.lock(configuration.row, size);
     }
-  );
+
+    return configuration;
+  });
+
+  // NOTE: UPDATE ROWS ACCORDINGLY
+  const rows = [...matrix.rows];
+  rows[row][column] = data[id];
 
   return {
-    data,
-    rows,
+    data: [...data],
+    rows: matrix.rows,
     matches: matching.getMatches(size),
   };
 };
