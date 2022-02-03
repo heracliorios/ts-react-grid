@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { calculateMatches } from './helpers';
 
 const Count = ({ matches = { columns: [], rows: [], diagonals: [] } }) => {
-  const matches = calculateMatches(matches);
+  const count = calculateMatches(matches);
 
-  return <div className="count">{matches}</div>;
+  return <div className="count">{count}</div>;
 };
 
 export default Count;
