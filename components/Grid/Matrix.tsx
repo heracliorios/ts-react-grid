@@ -12,8 +12,8 @@ const Matrix: React.FC<MatrixProps, MatrixState> = ({
 }) => {
   return (
     <div className="matrix">
-      {rows.map((row) => (
-        <div className="row">
+      {rows.map((row, index) => (
+        <div className="row" key={`grid-row-${index}`}>
           {row.map(({ id, value, column, row, diagonal }) => (
             <Data
               key={`grid-row-${row}-column-${column}`}
